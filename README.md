@@ -62,6 +62,8 @@ Various enhancements to #%app
    (map [+ 5] '(1 2 3 4))                   ; '(6 7 8 9)
    ```
 
+   Like `curry` in `(racket/function)`
+
 8. binary infix expressions with `{}`:
 
    ```scheme
