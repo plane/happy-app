@@ -49,7 +49,7 @@ Various enhancements to #%app
    Inspired by Greg Hendershott's Rackjure:
    https://github.com/greghendershott/rackjure
 
-7. binary infix expressions with {}:
+7. binary infix expressions with `{}`:
 
        (map [x -> {x * x}]
             '(4 5 6 7))                         => '(16 25 36 49)
