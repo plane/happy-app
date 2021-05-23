@@ -20,13 +20,6 @@ Various enhancements to #%app
         (list 4 5 6 7))                     => '(5 -3 18 4/7)
    ```
 
-   Parens can be omitted if unambiguous:
-   
-   ```scheme
-   (map [x -> * x x]
-        (range 1 6))                        => '(1 4 9 16 25)
-   ```
-
    Inspired by Haskell's `\x -> x` lambda syntax
 
 3. lambdas with `[x ->* x]` (discarding extra arguments):
@@ -38,8 +31,8 @@ Various enhancements to #%app
 4. thunks with `[-> x]`:
 
    ```scheme
-   (call-with-values [-> values 2 3 4]
-                     [x y z -> * x y z])    => 24
+   (call-with-values [-> (values 2 3 4)]
+                     [x y z -> (* x y z)])  => 24
    ```
 
    Like `thunk` in `(racket/function)`
