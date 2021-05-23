@@ -2,7 +2,7 @@
 
 Various enhancements to #%app
 
-1. lambdas with `_` using `ugly-app`:
+1. **lambdas with `_` using `ugly-app`**
 
    ```scheme
    (map (_ 2 3) (list + - * /))             ; '(5 -1 6 2/3)
@@ -11,7 +11,7 @@ Various enhancements to #%app
    Requires ugly-app to be installed:  
    https://github.com/AlexKnauth/ugly-app
 
-2. lambdas with `[x -> x]`:
+2. **lambdas with `[x -> x]`**
 
    ```scheme
    (map [x y z -> (x y z)]
@@ -22,13 +22,13 @@ Various enhancements to #%app
 
    Inspired by Haskell's `\x -> x` lambda syntax
 
-3. lambdas with `[x ->* x]` (discarding extra arguments):
+3. **lambdas with `[x ->* x]` (discarding extra arguments)**
 
    ```scheme
    ([x y ->* (* x y)] 5 6 7)                ; 30
    ```
 
-4. thunks with `[-> x]`:
+4. **thunks with `[-> x]`**
 
    ```scheme
    (call-with-values [-> (values 2 3 4)]
@@ -37,7 +37,7 @@ Various enhancements to #%app
 
    Like `thunk` in `(racket/function)`
 
-5. thunks with `[->* x]` (discarding any arguments):
+5. **thunks with `[->* x]` (discarding any arguments)**
 
    ```scheme
    (build-list 10 [->* (random)])           ; list of random values
@@ -45,7 +45,7 @@ Various enhancements to #%app
 
    Like `thunk*` in `(racket/function)`
 
-6. `dict-ref` and `sequence-ref` with `[]`:
+6. **`dict-ref` and `sequence-ref` with `[]`**
 
    ```scheme
    ['(hello world) 1]                       ; 'world
@@ -56,7 +56,7 @@ Various enhancements to #%app
    Inspired by Greg Hendershott's Rackjure:  
    https://github.com/greghendershott/rackjure
 
-7. curried functions with `[]`:
+7. **curried functions with `[]`**
 
    ```scheme
    (map [+ 5] '(1 2 3 4))                   ; '(6 7 8 9)
@@ -64,7 +64,7 @@ Various enhancements to #%app
 
    Like `curry` in `(racket/function)`
 
-8. binary infix expressions with `{}`:
+8. **binary infix expressions with `{}`**
 
    ```scheme
    (map [x -> {x * x}]
