@@ -56,7 +56,13 @@ Various enhancements to #%app
    Inspired by Greg Hendershott's Rackjure:  
    https://github.com/greghendershott/rackjure
 
-7. binary infix expressions with `{}`:
+7. curried functions with `[]`:
+
+   ```scheme
+   (map [+ 5] '(1 2 3 4))                   ; '(6 7 8 9)
+   ```
+
+8. binary infix expressions with `{}`:
 
    ```scheme
    (map [x -> {x * x}]
