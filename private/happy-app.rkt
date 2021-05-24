@@ -13,7 +13,6 @@
          racket/function
          racket/list
          racket/sequence
-         ;         syntax/parse
          syntax/parse/define)
 
 (require (only-in ugly-app [#%app ugly-app] _))
@@ -33,9 +32,9 @@
     ;; arg0 = procedure, arg1 = procedure arg
     ((procedure? arg0) (ugly-app apply curry arg0 arg1 rest))
     [else
-      (raise-argument-error 'ref-or-curry
-                            "dict? or sequence?"
-                            arg0)]))
+     (raise-argument-error 'ref-or-curry
+                           "dict? or sequence?"
+                           arg0)]))
 
 (define-syntax (arrow-app stx)
   (syntax-parse stx #:datum-literals (-> ->*)
@@ -69,11 +68,11 @@
 (define-syntax (happy-app stx)
   (define app-stx
     (case (syntax-property stx 'paren-shape)
-      [(#\{) #'infix-app]
-      [(#\[) #'arrow-app]
+      [(#\{
+        (#\{ . #\{)) #'infix-app]
+      [(#\[)         #'arrow-app]
       [(#f
-        #\() #'ugly-app]))
+        #\()         #'ugly-app]))
   (syntax-parse stx
     [(_ v ...)
      #`(#,app-stx v ...)]))
-

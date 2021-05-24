@@ -1,12 +1,14 @@
 Some outstanding issues make this unsuitable as a general-purpose
 package for now:
 
-1. No documentation
-
-2. `->` and `->*` lambdas alias the symbols in `(racket/contract)`, and
+1. `->` and `->*` lambdas alias the symbols in `(racket/contract)`, and
    no longer work if it is `require`d (even if they seem unambiguous)
 
-3. infix expressions with an initial wildcard `{_ x y}` do not work,
-   even though the corresponding ugly-app expressions `(x _ y)` work
+2. Needs documentation
 
-But it's a fun toy project (:
+3. Needs test suite
+
+4. infix expressions with an initial wildcard `{_ x y}` do work now,
+   thanks to Alex Knauth's help, but the implementation may need work
+
+5. Code in general could be cleaned up
