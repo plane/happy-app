@@ -6,9 +6,7 @@ package for now:
 
 2. Needs documentation
 
-3. Needs test suite
+3. infix expressions with an initial wildcard `{_ x y}` mostly work now,
+   thanks to Alex Knauth's help, although two test cases still fail
 
-4. infix expressions with an initial wildcard `{_ x y}` do work now,
-   thanks to Alex Knauth's help, but the implementation may need work
-
-5. Code in general could be cleaned up
+4. Code in general could be cleaned up
