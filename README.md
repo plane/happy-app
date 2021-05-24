@@ -84,6 +84,6 @@ Various enhancements to #%app
 
 - The choice between `[+ 5]` and `[sequence index]` happens at
   run-time, since there's no syntactic difference.  `dict?` is
-  checked first, then `sequence?`, then `procedure?`
+  checked first, then `sequence?`, then `procedure?`.
 
 See BUGS.md
