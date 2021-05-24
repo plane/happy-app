@@ -86,4 +86,4 @@ Various enhancements to #%app
   run-time, since there's no syntactic difference.  `dict?` is
   checked first, then `sequence?`, then `procedure?`.
 
-See BUGS.md
+Please see GitHub issues: https://github.com/plane/happy-app/issues/
