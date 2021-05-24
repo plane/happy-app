@@ -3,7 +3,15 @@
 (provide #%app _)
 
 ;; --------------------------------------------------------------------------
-  
+;;  
+;; `happy-app`
+;;
+;; The macros are defined in a submodule so #%app can be used normally 
+;; internally.  The submodule is then `require`d so that it can be tested
+;; with rackunit at the bottom, or on the REPL.
+;;  
+;; --------------------------------------------------------------------------
+
 (module happy-app racket/base
   (provide (rename-out [happy-app #%app])
            _)
@@ -69,10 +77,7 @@
       [(_ arg)                                  #'(curry arg)]
 
       ;; container reference OR curried expression
-      [(_ arg expr ...)                         #'(ref-or-curry arg expr ...)]
-
-
-      ))
+      [(_ arg expr ...)                         #'(ref-or-curry arg expr ...)]))
   
   (define-syntax (happy-app stx)
     ;; we might get paren shapes like (#\{ . #\{),
@@ -92,6 +97,12 @@
        #`(#,app-stx v ...)])))
 
 (require 'happy-app)
+
+;; --------------------------------------------------------------------------
+;;  
+;; Tests 
+;;  
+;; --------------------------------------------------------------------------
 
 (module+ test
   (require rackunit)
