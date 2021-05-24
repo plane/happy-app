@@ -80,4 +80,10 @@ Various enhancements to #%app
    Inspired by David Wheeler's SRFI 105:  
    https://srfi.schemers.org/srfi-105/srfi-105.html
 
+## Notes
+
+- The choice between `[+ 5]` and `[sequence index]` happens at
+  run-time, since there's no syntactic difference.  `dict?` is
+  checked first, then `sequence?`, then `procedure?`
+
 See BUGS.md
