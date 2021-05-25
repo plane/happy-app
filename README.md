@@ -1,89 +1,9 @@
 # happy-app
 
-Various enhancements to #%app
+Happy App: A Toolbox of Syntactic Shortcuts
 
-1. **lambdas with `_` using `ugly-app`**
+A racket package which provides a whole bunch of syntactic shortcuts by redefining 
+`#%app`. It makes me happy, and I hope it makes you happy too!
 
-   ```scheme
-   (map (_ 2 3) (list + - * /))             ; '(5 -1 6 2/3)
-   ```
-   
-   Requires ugly-app to be installed:  
-   https://github.com/AlexKnauth/ugly-app
+Documentation: https://www.quarplet.com/docs/happy-app/
 
-2. **lambdas with `[x -> x]`**
-
-   ```scheme
-   (map [x y z -> (x y z)]
-        (list + - * /)
-        (list 1 2 3 4)
-        (list 4 5 6 7))                     ; '(5 -3 18 4/7)
-   ```
-
-   Parens can be implied if it's unambiguous:
-
-   ```scheme
-   (map [x -> * x x] (list 1 2 3 4))        ; '(1 4 9 16)
-   ```
-
-   Inspired by Haskell's `\x -> x` lambda syntax
-
-3. **lambdas with `[x ->* x]` (discarding extra arguments)**
-
-   ```scheme
-   ([x y ->* (* x y)] 5 6 7)                ; 30
-   ```
-
-4. **thunks with `[-> x]`**
-
-   ```scheme
-   (call-with-values [-> values 2 3 4]
-                     [x y z -> * x y z])  ; 24
-   ```
-
-   Like `thunk` in `(racket/function)`
-
-5. **thunks with `[->* x]` (discarding any arguments)**
-
-   ```scheme
-   (build-list 10 [->* (random)])           ; list of random values
-   ```
-
-   Like `thunk*` in `(racket/function)`
-
-6. **`dict-ref` and `sequence-ref` with `[]`**
-
-   ```scheme
-   ['(hello world) 1]                       ; 'world
-   [(hash 'color 'pink
-          'shape 'rhombus) 'color]          ; 'pink
-   ```
-
-   Inspired by Greg Hendershott's Rackjure:  
-   https://github.com/greghendershott/rackjure
-
-7. **curried functions with `[]`**
-
-   ```scheme
-   (map [+ 5] '(1 2 3 4))                   ; '(6 7 8 9)
-   ```
-
-   Like `curry` in `(racket/function)`
-
-8. **binary infix expressions with `{}`**
-
-   ```scheme
-   (map [x -> {x * x}]
-        '(4 5 6 7))                         ; '(16 25 36 49)
-   ```
-
-   Inspired by David Wheeler's SRFI 105:  
-   https://srfi.schemers.org/srfi-105/srfi-105.html
-
-## Notes
-
-- The choice between `[+ 5]` and `[sequence index]` happens at
-  run-time, since there's no syntactic difference.  `dict?` is
-  checked first, then `sequence?`, then `procedure?`.
-
-Please see GitHub issues: https://github.com/plane/happy-app/issues/
