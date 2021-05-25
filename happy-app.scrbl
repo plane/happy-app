@@ -7,14 +7,18 @@
 @(require
    scribble/example
    (for-label (except-in racket/base #%app _)
-              racket/list
+              racket/dict
               racket/function
+              racket/list
+              racket/sequence
               happy-app))
 
 @(define (make-happy-eval)
    (make-base-eval #:lang 'racket/base
-                   '(require racket/list
+                   '(require racket/dict
                              racket/function
+                             racket/list
+                             racket/sequence
                              happy-app)
                    '(random-seed 0)))
 
@@ -69,9 +73,6 @@ and an expression to evaluate goes on the right side.
    '(1 2 3 4))
   (eval:check
    (map [x -> (* x x)] '(1 2 3 4))
-   '(1 4 9 16))
-  (eval:check
-   (map [x -> * x x] '(1 2 3 4)) 
    '(1 4 9 16))
   (eval:check 
    (map [x y z -> (x y z)]
@@ -132,7 +133,7 @@ And just like before, you can leave out the parentheses:
                       [x y z -> * x y z])
     24))
 
-This function is like @racket[thunk] from @racketmodname[racket/function].  
+This functionality is like @racket[thunk] from @racketmodname[racket/function].  
 
 @section{Thunk*s with @racket[[->* x]]}
 
@@ -143,7 +144,7 @@ Like the above, but the thunk accepts arguments and discards them.
     (build-list 10 [->* (random 100)])
     '(85 65 20 40 89 45 54 38 26 62)))
 
-This function is like @racket[thunk*] from @racketmodname[racket/function].  
+This functionality is like @racket[thunk*] from @racketmodname[racket/function].  
 
 @section{Container access with @racket[[container index]]}
 
@@ -186,7 +187,7 @@ because there's no syntactic difference between the two.  Although this should u
 unambiguous, @code{happy-app} checks @racket[dict?] first, then @racket[sequence?], then 
 @racket[procedure?]; ambiguous cases will be resolved in that order.
 
-This function is like @racket[curry] from @racketmodname[racket/function].  
+This functionality is like @racket[curry] from @racketmodname[racket/function].  
 
 @section{Binary infix expressions with @racket[{}]}
 
