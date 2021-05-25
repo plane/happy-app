@@ -2,7 +2,7 @@
 
 (define collection "happy-app")
 (define pkg-authors '("crystal@panix.com"))
-(define version "0.4")
+(define version "0.5")
 (define scribblings
  '(("happy-app.scrbl" () (library) "happy-app")))
 (define pkg-desc "Happy little #%app enhancement")
