@@ -12,3 +12,4 @@
   ;; thunk*s, discarding any arguments
   (check-equal? (build-list 4 [->* 'a])
                 (list 'a 'a 'a 'a)))
+

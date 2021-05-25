@@ -25,3 +25,4 @@
   (check-equal? ([x y ->* * x y] 5 6    ) 30)
   (check-equal? ([x y ->* * x y] 5 6 7  ) 30)
   (check-equal? ([x y ->* * x y] 5 6 7 8) 30))
+

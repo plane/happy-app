@@ -18,3 +18,4 @@
 
   ;; curry with no args
   (check-equal? (([+] 3) 4) (+ 3 4)))
+
