@@ -6,10 +6,11 @@
 (define scribblings
  '(("happy-app.scrbl" () (library) "happy-app")))
 (define pkg-desc "Happy little #%app enhancement")
-(define deps '(("base" "8.0")
+(define deps '("base"
                "git://github.com/AlexKnauth/ugly-app?path=ugly-app"))
 (define build-deps '("rackunit-lib"
                      "racket-doc"
-                     "scribble-lib"))
+                     "scribble-lib"
+                     "syntax-classes-lib"))
 (define compile-omit-paths '("examples"))
 
