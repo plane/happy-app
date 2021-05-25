@@ -7,12 +7,15 @@
 @(require
    scribble/example
    (for-label (except-in racket/base #%app _)
+              racket/list
               racket/function
               happy-app))
 
 @(define (make-happy-eval)
    (make-base-eval #:lang 'racket/base
-                   '(require happy-app)
+                   '(require racket/list
+                             racket/function
+                             happy-app)
                    '(random-seed 0)))
 
 @(define-syntax-rule (happy-examples body ...)
@@ -144,8 +147,17 @@ This function is like @racket[thunk*] from @racketmodname[racket/function].
 
 @section{Container access with @racket[[container index]]}
 
+This is shorthand for either @racket[dict-ref] or @racket[sequence-ref], depending on 
+what you pass in.  These are generic interfaces that work for all sorts of containers, 
+including lists, vectors, strings, hashes, association lists, and so on.
+
 @(happy-examples
   (eval:check ['(hello world) 1] 'world)
+  (eval:check ['(a b c d e) 3] 'd)
+  (eval:check [#(foo bar baz) 0] 'foo)
+  (eval:check ["hello" 0] #\h)
+  (eval:check ['((color . blue)
+                 (shape . circle)) 'shape] 'circle)
   (eval:check [(hash 'color 'pink
                      'shape 'rhombus) 'color] 'pink))
 
@@ -153,8 +165,21 @@ Inspired by @hyperlink["https://github.com/greghendershott/rackjure"]{Greg Hende
 
 @section{Curried functions with @racket[[]]}
 
+Currying lets you express certain functions even more simply.  For example, the arrow lambda:
+
+@racketblock[[x -> + x 2]] 
+
+could be written equivalently:
+
+@racketblock[[+ 2]]
+
 @(happy-examples
-  (eval:check (map [+ 5] '(1 2 3 4)) '(6 7 8 9)))
+  (eval:check ([+ 2] 3) 5)
+  (eval:check ([+ 2 3] 5) 10)
+  (eval:check (map [filter even?] 
+                   '((1 2 3 4 5) 
+                     (6 7 8 9))) 
+              '((2 4) (6 8))))
 
 The choice between @racket[[+ 5]] and @racket[[sequence index]] is decided at run-time,
 because there's no syntactic difference between the two.  Although this should usually be
@@ -165,11 +190,39 @@ This function is like @racket[curry] from @racketmodname[racket/function].
 
 @section{Binary infix expressions with @racket[{}]}
 
+People sometimes have trouble understanding mathematical prefix expressions like this:
+
+@racketblock[(< x 3)]
+
+To make it easier to understand, Racket has built-in "dotted infix" notation, which lets
+you rewrite it like this:
+
+@racketblock[(x . < . 3)]
+
+But with this package, you can write infix expressions a bit more simply:
+
+@racketblock[{x < 3}]
+
+These infix expressions must be binary – that is, they must have a function in the middle
+(called the "operator") and one argument on each side (called the "operands").  
+
 @(happy-examples
+  (eval:check {2 < 3} #t)
+  (eval:check {5 + {10 * 3}} 35)
   (eval:check
     (map [x -> {x * x}]
          '(4 5 6 7))
     '(16 25 36 49)))
+
+If an infix expression has placeholders, it's automatically converted into a lambda expression:
+
+@(happy-examples
+  (eval:check ({2 _ 3} +) 5)
+  (eval:check {5 + {10 * 3}} 35)
+  (eval:check 
+    (filter {_ < 3} 
+            (range 10)) 
+    '(0 1 2)))
 
 Inspired by @hyperlink["https://srfi.schemers.org/srfi-105/srfi-105.html"]{David Wheeler's SRFI 105}.
 
